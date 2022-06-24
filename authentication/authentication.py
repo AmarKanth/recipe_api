@@ -13,7 +13,9 @@ class SkipPublicUrls(TokenAuthentication):
 		auth = request.META.get('HTTP_AUTHORIZATION', b'').split()
 
 		if len(auth) <= 1:
-			msg = ('Invalid token header. No credentials provided.')
-			raise AuthenticationFailed(msg)
+			raise AuthenticationFailed('Invalid token header. No credentials provided.')
+
+		if auth[0].lower() != self.keyword.lower():
+			raise AuthenticationFailed('Invalid Keyword.')
 
 		return self.authenticate_credentials(auth[1])
