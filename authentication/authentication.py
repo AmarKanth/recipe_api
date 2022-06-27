@@ -1,21 +1,16 @@
 from django.contrib.auth.models import AnonymousUser
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.exceptions import AuthenticationFailed
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
-class SkipPublicUrls(TokenAuthentication):
+class SkipPublicUrls(JWTAuthentication):
 
 	def authenticate(self, request):
-		skip_urls = ['/api/token/', '/api/docs/', '/api/schema/']
+		skip_urls = ['/api/docs/', '/api/schema/']
 
 		if request.path in skip_urls:
 			return (AnonymousUser, None)
 
-		auth = request.META.get('HTTP_AUTHORIZATION', b'').split()
+		header = self.get_header(request)
+		raw_token = self.get_raw_token(header)
+		validated_token = self.get_validated_token(raw_token)
 
-		if len(auth) <= 1:
-			raise AuthenticationFailed('Invalid token header. No credentials provided.')
-
-		if auth[0].lower() != self.keyword.lower():
-			raise AuthenticationFailed('Invalid Keyword.')
-
-		return self.authenticate_credentials(auth[1])
+		return self.get_user(validated_token), validated_token
