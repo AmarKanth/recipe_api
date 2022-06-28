@@ -6,7 +6,10 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 class LogoutView(APIView):
-	
+	"""
+	It handels the application logout. 
+	"""
+
 	def post(self, request):
 		try:
 			refresh_token = request.data["refresh_token"]
@@ -19,6 +22,9 @@ class LogoutView(APIView):
 
 
 class LogoutAllView(APIView):
+	"""
+	It handels the logout from all the devices.
+	"""
 
 	def post(self, request):
 		tokens = OutstandingToken.objects.filter(user=request.user)

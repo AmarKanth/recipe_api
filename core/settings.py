@@ -137,7 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'authentication.authentication.SkipPublicUrls',
+        'authentication.authentication.JWTAuthentication',
     ),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
@@ -146,4 +146,9 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
     'UPDATE_LAST_LOGIN': True,
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Recipe Api',
+    'VERSION': '1.0.0',
 }

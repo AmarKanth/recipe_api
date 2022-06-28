@@ -1,7 +1,10 @@
 from django.contrib.auth.models import AnonymousUser
-from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication as JWTA
 
-class SkipPublicUrls(JWTAuthentication):
+class JWTAuthentication(JWTA):
+	"""
+	This custom wrapper skip all the public urls from authentication.
+	"""
 
 	def authenticate(self, request):
 		skip_urls = ['/api/docs/', '/api/schema/']
