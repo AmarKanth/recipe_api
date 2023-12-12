@@ -11,16 +11,16 @@ services:
             - POSTGRES_PASSWORD=postgres
     web:
         build: .
-        command: >
-            sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+        entrypoint: ["sh", "/app/entrypoint.sh"]
         volumes:
             - .:/app
         ports:
             - "8000:8000"
         environment:
-            - POSTGRES_NAME=postgres
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
+            - DB_HOST=db
+            - DB_NAME=postgres
+            - DB_USER=postgres
+            - DB_PASSWORD=postgres
         depends_on:
             - db
 volumes:
