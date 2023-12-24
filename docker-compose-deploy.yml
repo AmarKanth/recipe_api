@@ -3,6 +3,7 @@ version: "3.9"
 services:
     db:
         image: postgres
+        restart: always
         volumes:
             - dev-db-data:/var/lib/postgresql/data
         environment:
@@ -11,11 +12,13 @@ services:
             - POSTGRES_PASSWORD=postgres
     web:
         build: .
+        restart: always
         entrypoint: ["sh", "/app/entrypoint.sh"]
         volumes:
             - .:/app
+            - static-data:/vol/web
         ports:
-            - "8000:8000"
+            - "9000:9000"
         environment:
             - DB_HOST=db
             - DB_NAME=postgres
@@ -25,5 +28,17 @@ services:
             - DJANGO_SECRET_KEY=changeme
         depends_on:
             - db
+    proxy:
+        build:
+            context: ./proxy
+        restart: always
+        depends_on:
+            - web
+        ports:
+            - 80:8000
+        volumes:
+            - static-data:/vol/static
+
 volumes:
     dev-db-data:
+    static-data:
