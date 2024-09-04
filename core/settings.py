@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'authentication',
     'recipe',
     'user',
+    'health_checks'
 ]
 
 MIDDLEWARE = [
