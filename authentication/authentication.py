@@ -7,7 +7,7 @@ class JWTAuthentication(JWTA):
 	"""
 
 	def authenticate(self, request):
-		skip_urls = ['/api/docs/', '/api/schema/', '/api/health-checks/']
+		skip_urls = ['/api/docs/', '/api/schema/', '/api/health-checks/', '/api/ip/']
 
 		if request.path in skip_urls:
 			return (AnonymousUser, None)
