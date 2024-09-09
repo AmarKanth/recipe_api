@@ -16,8 +16,7 @@ sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 sudo usermod -aG docker ubuntu
-sudo su - $USER
-newgrp docker
+sudo su - ubuntu -c "newgrp docker && docker --version"
 
 sudo systemctl enable docker
 sudo systemctl start docker
