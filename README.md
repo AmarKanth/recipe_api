@@ -1,5 +1,6 @@
 ### User Data
 ```
+#!/bin/bash
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -15,8 +16,10 @@ sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 sudo usermod -aG docker ubuntu
-newgrp docker
+sudo su - ubuntu -c "newgrp docker && docker --version"
 
 sudo systemctl enable docker
 sudo systemctl start docker
+
+#sudo reboot
 ```
