@@ -8,4 +8,4 @@ class HealthCheck(APIView):
 
 class GetIPAdrress(APIView):
 	def get(self, request):
-		return Response({'ip': request.META.get('REMOTE_ADDR')})
+		return Response(dict(request.headers))
