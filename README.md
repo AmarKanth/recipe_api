@@ -20,4 +20,6 @@ sudo su - $USER
 
 sudo systemctl enable docker
 sudo systemctl start docker
+
+sudo reboot
 ```
