@@ -1,5 +1,6 @@
 ### User Data
 ```
+#!/bin/bash
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 sudo install -m 0755 -d /etc/apt/keyrings
