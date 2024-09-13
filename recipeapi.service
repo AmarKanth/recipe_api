@@ -1,0 +1,17 @@
+sudo bash -c 'cat << \EOF > /etc/systemd/system/recipeapi.service
+[Unit]
+Description=Start Recipe App
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker compose -f /home/ubuntu/recipe_api/docker-compose-deploy.yml up -d
+ExecStop=/usr/bin/docker compose -f /home/ubuntu/recipe_api/docker-compose-deploy.yml down
+
+[Install]
+WantedBy=multi-user.target
+EOF'
+
+sudo systemctl enable recipeapi.service
+sudo systemctl start recipeapi.service
