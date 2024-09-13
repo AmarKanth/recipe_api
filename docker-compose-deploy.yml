@@ -5,6 +5,7 @@ services:
         image: postgres
         volumes:
             - dev-db-data:/var/lib/postgresql/data
+        restart: always
         environment:
             - POSTGRES_DB=postgres
             - POSTGRES_USER=postgres
@@ -16,6 +17,7 @@ services:
             - .:/app
         ports:
             - "8000:8000"
+        restart: always
         environment:
             - DB_HOST=db
             - DB_NAME=postgres
