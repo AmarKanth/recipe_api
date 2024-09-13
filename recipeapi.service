@@ -13,5 +13,6 @@ ExecStop=/usr/bin/docker compose -f /home/ubuntu/recipe_api/docker-compose-deplo
 WantedBy=multi-user.target
 EOF'
 
+sudo systemctl daemon-reload
 sudo systemctl enable recipeapi.service
 sudo systemctl start recipeapi.service
